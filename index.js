@@ -1,10 +1,12 @@
 //1.Crear un objetos express
 
 const express=require('express');
-
+const bodyParser = require('body-parser');
 //2.Crear un objeto que represente nuestra aplicacion
 
 const app = express();
+
+
 
 app.use(express.json());
 
@@ -44,6 +46,7 @@ app.post(
 app.post(
     '/dividir',
     (req, res)=>{
+        
         let resultado;
         try {
             const {numeroUno, numeroDos}= req.body; 
@@ -64,8 +67,13 @@ app.post(
 app.post(
     '/sumanumeros',
     (req, res)=>{
-        let resultado;
         
+        let resultado = 0;
+        let numeros = req.body.numeros;
+        for (let i = 0; i < numeros.length; i++) {
+          resultado += numeros[i];
+        }
+        res.json(resultado);
     }
 );
 
